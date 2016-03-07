@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html ng-app="lolCatApp">
+
+<head>
+  <meta charset="utf-8">
+  <title>LOLCAT</title>
+
+<link rel="stylesheet" type="text/css" href="styles2.css"> 
+  <link rel="stylesheet" type="text/css" href="styles-form.css"> 
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  
+</head>
+
+<body ng-controller="MainController">
+
+
+  <header>
+
+    <div id="hdr">
+      <div id="logo"></div>
+
+      <div id="nav1">
+        <ul>
+          <li id="BU-select">
+            <a href="#" id="selectBU">
+              <div class="BU-icon"></div>
+            </a>
+            <ul>
+              <li><a href="#">In-House</a></li>
+              <li><a href="#">Lites Hosted</a></li>
+              <li><a href="#">Precision</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#create_entry">
+              <div class="createNew"></div>
+            </a>
+          </li>
+          <li>
+            <a href="#HHB" onClick="myRandom()" id="HHB_pop">
+              <div class="help"></div>
+            </a>
+          </li>
+          <li>
+            <a href="#search">
+              <div class="nav1Search"></div>
+            </a>
+          </li>
+        </ul>
+        <!--<form id="tfnewsearch" method="get" action="http://www.google.com"><input type="text" id="tfq" class="tftextinput2" name="q" size="21" maxlength="120" value="Search for Institution"><input type="submit" value=">" class="tfbutton2"></form><div class="tfclear"></div>-->
+      </div>
+    </div>
+
+    <br clear="all">
+
+    <div class="menuIcon">
+      <a href="#menuExpand"><img src="img/mob-filters.png" class="menuImg" />Filters</a>
+    </div>
+    <div id="nav2">
+      <ul>
+        <li>Show All</li>
+        <li class="grayBtn">New</li>
+        <li class="lt-blueBtn">Branding Started</li>
+        <li class="lt-greenBtn">QA</li>
+        <li class="drk-tealBtn">Published/Exports Sent</li>
+        <li class="greenBtn">Testing</li>
+        <li class="drk-grayBtn">Billing</li>
+        <li>History</li>
+      </ul>
+    </div>
+
+
+
+    <a href="#x" class="overlay" id="HHB"></a>
+    <span class="popup">
+        <img id="imageid" src=""  />
+    </span>
+
+    <a href="#x" class="overlay" id="create_entry"></a>
+    <span class="popup">
+    
+        <!--FORM TO ADDING A PROJECT    -->
+        
+         <form name="addProject" ng-submit="addProject()">
+              <label>RT: </label>
+              <input type="text" placeholder="123456789"  autofocus required ng-model="bank.rt" ng-value="{{bank.rt}}" />
+              <br />
+              <label>Bank: </label>
+              <input type="text" placeholder="Financial Institution" required ng-model="bank.name" ng-value="{{bank.name}}"/>
+              <br />
+              <label>City:</label>
+              <input type="text" placeholder="City, State" required  ng-model="bank.location" ng-value="{{bank.location}}" />
+              <fieldset  id="bu" ng-form='frmBU'>
+                <input type="radio" value="1" checked name="Precision" ng-model="bank.idBU" />
+                <label>Precision</label>
+                <input type="radio" value="2" name="Lites Hosted" ng-model="bank.idBU"  />
+                <label>Lites Hosted</label>
+                <input type="radio" value="3" name="In-House" ng-model="bank.idBU" />
+                <label>In-House</label>
+              </fieldset>
+              <br />
+              <label>Master Case #: </label>
+              <input type="text" placeholder="201600000000" required ng-model="project.masterCase" ng-value="{{project.MasterCase}}"/>
+              <br />
+              <label>Brand Case #: </label>
+              <input type="text" placeholder="201600000000" ng-model="project.facetsCase" ng-value="{{project.facetsCase}}" />
+              <br />
+              <fieldset id="type">
+                <input type="radio" value="1" checked name="Retail" ng-model="project.idType" />
+                <label>Retail</label>
+                <input type="radio" value="2" name="Business" ng-model="project.idType" />
+                <label>Business</label>
+                <input type="radio" value="3" name="Both" ng-model="project.idType" />
+                <label>Both</label>
+              </fieldset>
+              <br />
+              <label>Screenshot Due Date: </label>
+              <input type="date" name="dueDate" ng-model="project.dueDate" />
+              <br />
+              <label>Installation Date: </label>
+              <input type="date" name="date" ng-model="project.installDate" />
+              <br />
+              <fieldset id="saRecieved">
+                <label>S/A Recieved? </label>
+                <input type="radio" value="1" checked name="Yes" ng-model="project.saRecieved" />
+                <label>Yes</label>
+                <input type="radio" value="0" name="No" ng-model="project.saRecieved" />
+                <label>No</label>
+              </fieldset>
+              <label>RO Form #: </label>
+              <input type="text" ng-model="project.roForm" ng-value="{{roForm.saRecieved}}" />
+              <br />
+              <label>BO Form #: </label>
+              <input type="text" ng-model="project.boForm" ng-value="{{boForm.saRecieved}}" />
+              <br />
+                  <input type="submit" ng-click="addProject()" value="Save" />
+
+
+         </form>
+</span>
+
+
+  </header>
+
+
+  <div class="flex-container">
+    <section class="flex-item gray">
+      <div class="lites">&nbsp;</div>
+      <label>Screenshot Date:
+        <time datetime="2014-06-20" class="due-date">20 September 2014</time>
+      </label>
+      <label>Installation Date:
+        <time datetime="2014-06-20" class="due-date">20 June 2014</time>
+      </label>
+      <!-- Bank Name, Bank Location -->
+      <address data-rt="123456789">Wherever Bank, Lincoln, NE</address>
+      <label>S/A Recieved?
+        <input type="checkbox" checked />
+      </label>
+      <label>Master #: <a href="#">123456789</a></label>
+      <label>Branding #: <a href="#">987654321</a></label>
+      <a href="#" class="branding-form">RO321654987</a>
+      <button class="caseButtons">Edit</button>
+    </section>
+
+    
+
+
+
+
+
+
+    <!--  remove information above this once the application is commincating with the database  -->
+  </div>
+
+    
+    
+<script src="scripts.js"></script>
+<script src="control.js"></script>
+
+
+</body>
+
+</html>
