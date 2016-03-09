@@ -20,7 +20,7 @@
     </script>
 </head>
 
-<body ng-controller="MainController">
+<body ng-controller="MainController" data-ng-init="init()">
 
 
     <header>
@@ -40,7 +40,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#create_entry">
+                        <a href="#create_entry" ng-click="clear()">
                             <div class="createNew"></div>
                         </a>
                     </li>
@@ -64,14 +64,14 @@
             <a href="#menuExpand"><img src="img/mob-filters.png" class="menuImg" />Filters</a>
         </div>
         <div id="nav2">
-            <ul>
-                <li>Show All</li>
-                <li class="grayBtn">New</li>
-                <li class="lt-blueBtn">Branding Started</li>
-                <li class="lt-greenBtn">QA</li>
-                <li class="drk-tealBtn">Published/Exports Sent</li>
-                <li class="greenBtn">Testing</li>
-                <li class="drk-grayBtn">Billing</li>
+            <ul>    
+                <li ng-click="filterExpression = {}">Show All</li>
+                <li class="grayBtn" ng-click="filterExpression = {idStatus: 1}">New</li>
+                <li class="lt-blueBtn" ng-click="filterExpression = {idStatus: 2}">Branding Started</li>
+                <li class="lt-greenBtn" ng-click="filterExpression = {idStatus: 3}">QA</li>
+                <li class="drk-tealBtn" ng-click="filterExpression = {idStatus: 4}">Published/Exports Sent</li>
+                <li class="greenBtn" ng-click="filterExpression = {idStatus: 5}">Testing</li>
+                <li class="drk-grayBtn" ng-click="filterExpression = {idStatus: 6}">Billing</li>
                 <li>History</li>
             </ul>
         </div>
@@ -87,22 +87,18 @@
         <span class="popup">
     
     <!--FORM TO ADDING A PROJECT    -->
-    <form name="searchUser" ng-submit="search(bankRt)">
-        <input type="search" required placeholder= "bank to find" ng-model="bankRt" />
-        <input  type="submit" value="Search">
-    </form>
+       
         {{message}}<br/>
         
     <form name="addProject" autocomplete="on" method="post" ng-submit="addProject()" >
       <label>RT: </label>
-      <input type="text" placeholder="123456789"  autofocus required ng-model="bank.rt" ng-value="{{bank.rt}}"  ng-change="{{project.rt}}" ng-focus="clear()" minlength=8  />
-      <!--ng-blur="search(bankRt)" -->
+      <input type="text" placeholder="123456789"  autofocus required ng-model="bankRt" ng-focus="clear()" ng-blur="search(bankRt)"          ng-change="{{project.rt}}" minlength=8 />
       <br />
       <label>Bank: </label>
-      <input type="text" placeholder="Financial Institution" required ng-model="bank.name" ng-value="{{bank.name}}"/>
+      <input type="text" placeholder="Financial Institution" required  ng-model="bank.name" ng-value="{{bank.name}}" ng-readonly =         "enableText"/>
       <br />
       <label>City:</label>
-      <input type="text" placeholder="City, State" required  ng-model="bank.location" ng-value="{{bank.location}}"  />
+      <input type="text" placeholder="City, State" required  ng-model="bank.location" ng-value="{{bank.location}}" ng-readonly = "enableText"/>
       <br />
       <label>State</label> 
       <select class="lstState" name="state" required ng-model="bank.state" >
@@ -239,34 +235,31 @@
 
 
     <div class="flex-container">
-        <section class="flex-item gray">
-            <div class="lites">&nbsp;</div>
-            <label>Screenshot Date:
-                <time datetime="2014-06-20" class="due-date">20 September 2014</time>
-            </label>
-            <label>Installation Date:
-                <time datetime="2014-06-20" class="due-date">20 June 2014</time>
-            </label>
-            <!-- Bank Name, Bank Location -->
-            <address data-rt="123456789">Wherever Bank, Lincoln, NE</address>
-            <label>S/A Recieved?
-                <input type="checkbox" checked />
-            </label>
-            <label>Master #: <a href="#">123456789</a></label>
-            <label>Branding #: <a href="#">987654321</a></label>
-            <a href="#" class="branding-form">RO321654987</a>
-            <button class="caseButtons">Edit</button>
-        </section>
-
-
-
-
-
-
-
-
-        <!--  remove information above this once the application is commincating with the database  -->
-    </div>
+     <!-- <select name="StatusSelector" id="StatusSelector" ng-model="selectedStatus" ng-options="stat.name for stat in statusList">
+      <option value="">Select</option>
+    </select>-->
+    <section class="flex-item gray"  ng-repeat="proj in projectList | filter: filterExpression">
+      <div class="lites">&nbsp;</div>
+      <label>Due Date:
+        <time datetime="2014-06-20" class="due-date">{{proj.dueDate | date:'MM-dd-yyyy'}}</time> <!--FORMATO MYSQL Due Date: 2016-03-03T06:00:00.000Z-->
+      </label>
+      <label>Installation Date:
+        <time datetime="2014-06-20" class="due-date">{{proj.installDate | date:'MM-dd-yyyy'}}</time>
+      </label>
+      <!-- Bank Name, Bank Location -->
+      <address data-rt="123456789" ng-init="bb = search(proj.rt)">{{proj.rt}}</address>
+      <label>S/A Recieved?
+        <p ng-if="proj.saReceived ===1">Yes</p>
+        <p ng-if="proj.saReceived ===0">No</p>
+      </label>
+      <label>Master #: <a href="#">{{proj.masterCase}}</a></label>
+      <label>Branding #: <a href="#">{{proj.facetsCase}}</a></label>
+      <a href="#" class="branding-form">RO321654987</a>  <!--falta!!!-->
+      <button class="caseButtons">Edit</button>
+    </section>
+    <!--  remove information above this once the application is commincating with the database  -->
+  </div>
+    
 
 
 
