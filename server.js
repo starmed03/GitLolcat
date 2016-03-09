@@ -53,6 +53,36 @@ app.post('/addBank', function(req, res) {
   });
 });
 
+//search bank by RT
+app.get( '/SearchRt', function(req, res){
+    connection.query('SELECT * FROM bank WHERE rt = ?', req.query.rt, function(err,rows){
+        if(err) throw err;
+        res.end(JSON.stringify(rows));
+        // wrap result-set as json
+        console.log('Json row was send');
+    });
+});
+
+// Select projects
+app.get( '/Projects', function(req, res){
+    connection.query('SELECT * FROM project', function(err,rows){
+        if(err) throw err;
+        res.end(JSON.stringify(rows));
+        // wrap result-set as json
+        console.log('Send projects!' + JSON.stringify(rows));
+    });
+});
+
+// Select status 
+app.get( '/Status', function(req, res){
+    connection.query('SELECT * FROM status', function(err,rows){
+        if(err) throw err;
+        res.end(JSON.stringify(rows));
+        // wrap result-set as json
+        console.log('Send status!' + JSON.stringify(rows));
+    });
+});
+
 app.listen(3000);
 
 
