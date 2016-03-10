@@ -2,6 +2,8 @@ var mysql = require('mysql');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var http = require('http');
+var path = require('path');
 
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
@@ -21,36 +23,42 @@ connection.connect(function(err) {
   }
 });
 
-app.post('/addProject', function(req, res) {
+app.post('/addProject', function (req, res) {
+    var bank = req.body;
+    console.log(project);
+    connection.query('insert into project set ?', project, function (err, result) {
+        if (err) {
+            console.log(err)
+            return resp.end(JSON.stringify({
+                success: false
+            }));
+        } else {
+            console.log(result.affectedRows);
+            return resp.end(JSON.stringify({
+                success: true
+            }));
+        }
+    });
 
-  var bank = req.body;
-  console.log(bank);
-  connection.query('insert into project set ?', project, function(err, result) {
-    if (err) {
-      console.log(err);
-      result.success = false;
-    } else {
-      console.log("Project Added" + result);
-      //result.json(doc);
-      result.success = true;
-    }
-  });
 });
 
-app.post('/addBank', function(req, res) {
+app.post('/addBank', function (req, resp) {
 
-  var bank = req.body;
-  console.log(bank);
-  connection.query('insert into bank set ?', bank, function(err, result) {
-    if (err) {
-      console.log(err);
-      result.success = false;
-    } else {
-      console.log("Bank Added" + result);
-      //result.json(doc);
-      result.success = true;
-    }
-  });
+    var bank = req.body;
+    console.log(bank);
+    connection.query('insert into bank set ?', bank, function (err, result) {
+        if (err) {
+            console.log(err)
+            return resp.end(JSON.stringify({
+                success: false
+            }));
+        } else {
+            console.log(result.affectedRows);
+            return resp.end(JSON.stringify({
+                success: true
+            }));
+        }
+    });
 });
 
 //search bank by RT

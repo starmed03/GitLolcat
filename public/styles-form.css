@@ -1,1 +1,15 @@
-fieldset,fieldset#bu,fieldset#type,fieldset#saRecieved { border: 0 none !important;}
+fieldset,
+fieldset#bu,
+fieldset#type,
+fieldset#saRecieved {
+    border: 0 none !important;
+}
+
+.lstState {
+    margin: 0;
+    padding: 3px;
+    color: #333333;
+    border: 1px solid #A9A9A9;
+    border-right: 1px solid #A9A9A9;
+    border-radius: 0px;
+}
