@@ -8,6 +8,7 @@
         $scope.clear = function () {
             $scope.bank = null;
             $scope.message = "";
+            $scope.rt = 0;
         }
 
         $scope.init = function () {
@@ -31,12 +32,12 @@
                 });
 
             }
-            
+
             $scope.project.rt = $scope.bank.rt;
             console.log(bankExist);
             console.log($scope.project);
-            
-            
+
+
             $http.post("/addProject", $scope.project).success(function (response, err) {
                 if (err) {
                     console.log('err:' + err);
