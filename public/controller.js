@@ -29,18 +29,18 @@
                     $scope.addBank();
                 });
             }
-<<<<<<< HEAD
+
 
             $scope.project.rt = $scope.bank.rt;
             console.log(bankExist);
             console.log($scope.project);
 
 
-=======
+
             $scope.project.rt = $scope.bank.rt;
             console.log(bankExist);
             console.log($scope.project);
->>>>>>> origin/master
+
             $http.post("/addProject", $scope.project).success(function (response, err) {
                 if (err) {
                     console.log('err:' + err);
