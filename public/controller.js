@@ -104,10 +104,11 @@
                 $scope.projectList = data;
                 console.log($scope.bank);
                 console.log($scope.projectList[0].rt);
-                angular.forEach($scope.projectList, function(value, key){
-                   console.log("TESTING!!!");
-                    console.log($scope.search(value.rt));
-                    console.log(key + ': ' + value.rt);
+              //  angular.forEach($scope.projectList, function(value, key){
+                //   console.log("TESTING!!!");
+                    
+                     
+                  //  console.log(key + ': ' + value.rt);
                 });
                 //  alert($scope.projectList);
             }); //close Get  
