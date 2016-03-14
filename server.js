@@ -77,7 +77,7 @@ app.get( '/Projects', function(req, res){
         if(err) throw err;
         res.end(JSON.stringify(rows));
         // wrap result-set as json
-        console.log('Send projects!' + JSON.stringify(rows));
+        //console.log('Send projects!' + JSON.stringify(rows));
     });
 });
 
@@ -87,7 +87,7 @@ app.get( '/Status', function(req, res){
         if(err) throw err;
         res.end(JSON.stringify(rows));
         // wrap result-set as json
-        console.log('Send status!' + JSON.stringify(rows));
+        //console.log('Send status!' + JSON.stringify(rows));
     });
 });
 
