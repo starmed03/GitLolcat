@@ -2,100 +2,100 @@
 <html ng-app="lolCatApp">
 
 <head>
-    <meta charset="utf-8">
-    <title>LOLCAT</title>
+	<meta charset="utf-8">
+	<title>LOLCAT</title>
 
-    <link rel="stylesheet" type="text/css" href="styles2.css">
-    <link rel="stylesheet" type="text/css" href="styles-form.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles2.css">
+	<link rel="stylesheet" type="text/css" href="styles-form.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script>
-        $(function() {
-            $("#dueDate").datepicker();
-            $("#installDate").datepicker();
-        });
 
-    </script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+	<script>
+		$(function() {
+			$("#installDate").datepicker({dateFormat:"yy-mm-dd", currentText: "mm-dd-yy"});
+			$("#dueDate").datepicker({dateFormat:"yy-mm-dd"});
+		});
+
+	</script>
 </head>
 
 <body ng-controller="MainController" data-ng-init="init()">
 
 
-    <header>
+	<header>
 
-        <div id="hdr">
-            <div id="logo"></div>
-            <div id="nav1">
-                <ul>
-                    <li id="BU-select">
-                        <a href="#" id="selectBU">
-                            <div class="BU-icon"></div>
-                        </a>
-                        <ul>
-                            <li><a href="#">In-House</a></li>
-                            <li><a href="#">Lites Hosted</a></li>
-                            <li><a href="#">Precision</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#create_entry" ng-click="clear()">
-                            <div class="createNew"></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#HHB" onClick="myRandom()" id="HHB_pop">
-                            <div class="help"></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#search">
-                            <div class="nav1Search"></div>
-                        </a>
-                    </li>
-                </ul>
-                <!--<form id="tfnewsearch" method="get" action="http://www.google.com"><input type="text" id="tfq" class="tftextinput2" name="q" size="21" maxlength="120" value="Search for Institution"><input type="submit" value=">" class="tfbutton2"></form><div class="tfclear"></div>-->
-            </div>
-        </div>
+		<div id="hdr">
+			<div id="logo"></div>
+			<div id="nav1">
+				<ul>
+					<li id="BU-select">
+						<a href="#" id="selectBU">
+							<div class="BU-icon"></div>
+						</a>
+						<ul>
+							<li><a href="#">In-House</a></li>
+							<li><a href="#">Lites Hosted</a></li>
+							<li><a href="#">Precision</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#create_entry" ng-click="clear()">
+							<div class="createNew"></div>
+						</a>
+					</li>
+					<li>
+						<a href="#HHB" onClick="myRandom()" id="HHB_pop">
+							<div class="help"></div>
+						</a>
+					</li>
+					<li>
+						<a href="#search">
+							<div class="nav1Search"></div>
+						</a>
+					</li>
+				</ul>
+				<!--<form id="tfnewsearch" method="get" action="http://www.google.com"><input type="text" id="tfq" class="tftextinput2" name="q" size="21" maxlength="120" value="Search for Institution"><input type="submit" value=">" class="tfbutton2"></form><div class="tfclear"></div>-->
+			</div>
+		</div>
 
-        <br clear="all">
-        <div class="menuIcon">
-            <a href="#menuExpand"><img src="img/mob-filters.png" class="menuImg" />Filters</a>
-        </div>
-        <div id="nav2">
-            <ul>    
-                <li ng-click="filterExpression = {}">Show All</li>
-                <li class="grayBtn" ng-click="filterExpression = {idStatus: 1}">New</li>
-                <li class="lt-blueBtn" ng-click="filterExpression = {idStatus: 2}">Branding Started</li>
-                <li class="lt-greenBtn" ng-click="filterExpression = {idStatus: 3}">QA</li>
-                <li class="drk-tealBtn" ng-click="filterExpression = {idStatus: 4}">Published/Exports Sent</li>
-                <li class="greenBtn" ng-click="filterExpression = {idStatus: 5}">Testing</li>
-                <li class="drk-grayBtn" ng-click="filterExpression = {idStatus: 6}">Billing</li>
-                <li>History</li>
-            </ul>
-        </div>
+		<br clear="all">
+		<div class="menuIcon">
+			<a href="#menuExpand"><img src="img/mob-filters.png" class="menuImg" />Filters</a>
+		</div>
+		<div id="nav2">
+			<ul>
+				<li ng-click="filterExpression = {}">Show All</li>
+				<li class="grayBtn" ng-click="filterExpression = {idStatus: 1}">New</li>
+				<li class="lt-blueBtn" ng-click="filterExpression = {idStatus: 2}">Branding Started</li>
+				<li class="lt-greenBtn" ng-click="filterExpression = {idStatus: 3}">QA</li>
+				<li class="drk-tealBtn" ng-click="filterExpression = {idStatus: 4}">Published/Exports Sent</li>
+				<li class="greenBtn" ng-click="filterExpression = {idStatus: 5}">Testing</li>
+				<li class="drk-grayBtn" ng-click="filterExpression = {idStatus: 6}">Billing</li>
+				<li>History</li>
+			</ul>
+		</div>
 
 
 
-        <a href="#x" class="overlay" id="HHB"></a>
-        <span class="popup">
+		<a href="#x" class="overlay" id="HHB"></a>
+		<span class="popup">
         <img id="imageid" src=""  />
     </span>
 
-        <a href="#x" class="overlay" id="create_entry"></a>
-        <span class="popup">
+		<a href="#x" class="overlay" id="create_entry"></a>
+		<span class="popup">
     
     <!--FORM TO ADDING A PROJECT    -->
-       
+      
         {{message}}<br/>
         
     <form name="addProject" autocomplete="on" method="post" ng-submit="addProject()" >
       <label>RT: </label>
-      <input type="text" placeholder="123456789"  autofocus required ng-model="bankRt" ng-focus="clear()" ng-blur="search(bankRt)"          ng-change="{{project.rt}}" minlength=8 />
+      <input type="text" placeholder="123456789"  autofocus required ng-model="bankRt" ng-value="{{bank.rt}}" ng-focus="clear()" ng-blur="search(bankRt)" ng-change="{{project.rt}}" minlength=8 />
       <br />
-      <label>Bank: </label>
-      <input type="text" placeholder="Financial Institution" required  ng-model="bank.name" ng-value="{{bank.name}}" ng-readonly =         "enableText"/>
+      <label>Bank: </label><input type="text" placeholder="Financial Institution" required  ng-model="bank.name" ng-value="{{bank.name}}" ng-readonly ="enableText"/>
       <br />
       <label>City:</label>
       <input type="text" placeholder="City, State" required  ng-model="bank.location" ng-value="{{bank.location}}" ng-readonly = "enableText"/>
@@ -185,11 +185,14 @@
       
       
       <label>Screenshot Due Date: </label>
-      <input type=datetime-local name="dueDate"  ng-model="project.dueDate"  />
+      <input type="text" id="dueDate" placeholder="Enter due date"  name="dueDate" ng-model="project.dueDate" ng-value="{{project.dueDate}}" >
+
  
       <br />
       <label>Installation Date: </label>
-      <input type="date" name="date" id="installDate" ng-model="project.installDate" placeholder="yyyy-MM-dd" />
+       <input type="text" id="installDate" placeholder="Enter installation date" name="installDate" ng-model="project.installDate" ng-value="{{project.installDate}}">
+       
+      <!--<input type="date" name="date" id="installDate" ng-model="project.installDate" placeholder="yyyy-MM-dd" /> -->
       <br />
       
       <fieldset id="saRecieved">
@@ -205,8 +208,8 @@
       <label>BO Form #: </label>
       <input type="text" ng-model="project.boForm" ng-value="{{boForm.saRecieved}}" />
       <br />
-     <button class="btn btn-primary" ng-click="addBank()">Add Bank</button>
-     <button type="submit" ng-disabled="addProject.$invalid" >Add Project</button>
+     <input type="button" ng-click="addBank(bankRT)" value="Add Bank">
+     <button type="submit" ng-disabled="addProject.$invalid" ng-click="Submit">Add Project</button>
 
         <div>
             <tt>{{bank.rt}}</tt>
@@ -228,43 +231,46 @@
 
  </form>
 
+<!--END OF FORM TO ADDING A PROJECT    -->
 </span>
 
 
-    </header>
+	</header>
 
 
-    <div class="flex-container">
-     <!-- <select name="StatusSelector" id="StatusSelector" ng-model="selectedStatus" ng-options="stat.name for stat in statusList">
+	<div class="flex-container">
+		<!-- <select name="StatusSelector" id="StatusSelector" ng-model="selectedStatus" ng-options="stat.name for stat in statusList">
       <option value="">Select</option>
     </select>-->
-    <section class="flex-item gray"  ng-repeat="proj in projectList | filter: filterExpression">
-      <div class="lites">&nbsp;</div>
-      <label>Due Date:
-        <time datetime="2014-06-20" class="due-date">{{proj.dueDate | date:'MM-dd-yyyy'}}</time> <!--FORMATO MYSQL Due Date: 2016-03-03T06:00:00.000Z-->
-      </label>
-      <label>Installation Date:
-        <time datetime="2014-06-20" class="due-date">{{proj.installDate | date:'MM-dd-yyyy'}}</time>
-      </label>
-      <!-- Bank Name, Bank Location -->
-      <address data-rt="123456789" ng-init="bb = search(proj.rt)">{{proj.rt}}</address>
-      <label>S/A Recieved?
-        <p ng-if="proj.saReceived ===1">Yes</p>
-        <p ng-if="proj.saReceived ===0">No</p>
-      </label>
-      <label>Master #: <a href="#">{{proj.masterCase}}</a></label>
-      <label>Branding #: <a href="#">{{proj.facetsCase}}</a></label>
-      <a href="#" class="branding-form">RO321654987</a>  <!--falta!!!-->
-      <button class="caseButtons">Edit</button>
-    </section>
-    <!--  remove information above this once the application is commincating with the database  -->
-  </div>
-    
+		<section class="flex-item gray" ng-repeat="proj in projectList | filter: filterExpression">
+			<div class="lites">&nbsp;</div>
+			<label>Due Date:
+				<time datetime="2014-06-20" class="due-date">{{proj.dueDate | date:'MM-dd-yyyy'}}</time>
+				<!--FORMATO MYSQL Due Date: 2016-03-03T06:00:00.000Z-->
+			</label>
+			<label>Installation Date:
+				<time datetime="2014-06-20" class="due-date">{{proj.installDate | date:'MM-dd-yyyy'}}</time>
+			</label>
+			<!-- Bank Name, Bank Location -->
+			<address data-rt="123456789" ng-init="bb = search(proj.rt)">{{proj.rt}}</address>
+			<label>S/A Recieved?
+				<p ng-if="proj.saReceived ===1">Yes</p>
+				<p ng-if="proj.saReceived ===0">No</p>
+			</label>
+			<label>Master #: <a href="#">{{proj.masterCase}}</a></label>
+			<label>Branding #: <a href="#">{{proj.facetsCase}}</a></label>
+			<a href="#" class="branding-form">RO321654987</a>
+			<!--falta!!!-->
+			<button class="caseButtons">Edit</button>
+		</section>
+		<!--  remove information above this once the application is commincating with the database  -->
+	</div>
 
 
 
-    <script src="scripts.js"></script>
-    <script src="controller.js"></script>
+
+	<script src="scripts.js"></script>
+	<script src="controller.js"></script>
 
 
 </body>
