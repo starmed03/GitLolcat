@@ -91,8 +91,9 @@
         {{message}}<br/>
         
     <form name="addProject" autocomplete="on" method="post" ng-submit="addProject()" >
+     
       <label>RT: </label>
-      <input type="text" placeholder="123456789"  autofocus required ng-model="bankRt" ng-focus="clear()" ng-blur="search(bankRt)"          ng-change="{{project.rt}}" minlength=8 />
+      <input type="number" placeholder="123456789" autofocus required ng-model="bankRt" ng-focus="clear()" ng-blur="search(bankRt)" ng-change="{{project.rt}}" minlength=8 />
       <br />
       <label>Bank: </label>
       <input type="text" placeholder="Financial Institution" required  ng-model="bank.name" ng-value="{{bank.name}}" ng-readonly =         "enableText"/>
@@ -168,10 +169,10 @@
       </fieldset>
       <br />
       <label>Master Case #: </label>
-      <input type="text" placeholder="201600000000" required ng-model="project.masterCase" ng-value="{{project.MasterCase}}"/>
+      <input type="number" placeholder="201600000000" required ng-model="project.masterCase" ng-value="{{project.MasterCase}}"/>
       <br />
       <label>Brand Case #: </label>
-      <input type="text" placeholder="201600000000" ng-model="project.facetsCase" ng-value="{{project.facetsCase}}" />
+      <input type="number" placeholder="201600000000" ng-model="project.facetsCase" ng-value="{{project.facetsCase}}" />
       <br />
       <fieldset id="type">
         <input type="radio" value="1" checked name="Retail" ng-model="project.idType" />
@@ -215,7 +216,6 @@
             <tt>{{bank.state}}</tt>
             <tt>{{bank.idBU}}</tt>
             <tt>{{project.masterCase}}</tt>
-            
             <tt>{{project.facetsCase}}</tt>
             <tt>{{project.idType}}</tt>
             <tt>{{project.dueDate}}</tt>
@@ -225,20 +225,14 @@
             <tt>{{project.boForm}}</tt>
             
         </div>
-
  </form>
-
 </span>
-
-
     </header>
-
-
     <div class="flex-container">
      <!-- <select name="StatusSelector" id="StatusSelector" ng-model="selectedStatus" ng-options="stat.name for stat in statusList">
       <option value="">Select</option>
     </select>-->
-    <section class="flex-item gray"  ng-repeat="proj in projectList | filter: filterExpression">
+    <section class="flex-item gray"  ng-repeat="proj in projectList | filter: filterExpression" repeat-end="">
       <div class="lites">&nbsp;</div>
       <label>Due Date:
         <time datetime="2014-06-20" class="due-date">{{proj.dueDate | date:'MM-dd-yyyy'}}</time> <!--FORMATO MYSQL Due Date: 2016-03-03T06:00:00.000Z-->
@@ -247,7 +241,7 @@
         <time datetime="2014-06-20" class="due-date">{{proj.installDate | date:'MM-dd-yyyy'}}</time>
       </label>
       <!-- Bank Name, Bank Location -->
-      <address data-rt="123456789" ng-init="bb = search(proj.rt)">{{proj.rt}}</address>
+      <address data-rt="123456789" ng-init="">{{banks[$index].name}} , {{banks[$index].location}}</address>
       <label>S/A Recieved?
         <p ng-if="proj.saReceived ===1">Yes</p>
         <p ng-if="proj.saReceived ===0">No</p>
@@ -259,10 +253,6 @@
     </section>
     <!--  remove information above this once the application is commincating with the database  -->
   </div>
-    
-
-
-
     <script src="scripts.js"></script>
     <script src="controller.js"></script>
 

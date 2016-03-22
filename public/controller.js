@@ -4,7 +4,8 @@
     var app = angular.module("lolCatApp", []);
 
     var MainController = function ($scope, $http, $filter) {
-
+        $scope.bank =[];
+        $scope.banks=[];
         $scope.clear = function () {
             $scope.bank = null;
             $scope.message = "";
@@ -72,48 +73,69 @@
                 //refresh();
             });
         };
-
         //SEARCH BANK
         $scope.search = function (bankRt) {
-            if(!angular.isNumber(bankRt)){
+            console.log(bankRt);
+            if(bankRt == null){
                     bankRt =0;
                 }
             $http.get('/SearchRt', {
                 params: {
                     "rt": bankRt
                 }
-            }).success(function (data) {
-                $scope.bank = data;
-                if (data.length == 0) {
+            }).success(function (dataBank) {
+                $scope.bank = dataBank[0];
+                console.log("round1");
+                console.log($scope.bank);
+                if (dataBank.length == 0) {
                     console.log("no bank");
                     $scope.enableText = false;
                     console.log($scope.enableText);
                 } else {
                     $scope.enableText = true;
                 }
-                var result = $filter('filter')($scope.bank, {rt: $scope.rt})[0];
-                $scope.bank = result;
+               // var result = $filter('filter')($scope.bank, {rt: $scope.rt})[0];
+                //$scope.bank = result; 
+                console.log("HERE: ");
+            console.log(dataBank[0]);
+                return dataBank[0];
             }); //close Get
-            $scope.rt = bankRt;
-            console.log($scope.bank);
-            return $scope.bank;
+           // $scope.rt = bankRt;
         }; //close search
+
         // GET Projects
+        
         $scope.projectList = [];
         $scope.projects = function () {
             $http.get('/Projects').success(function (data) {
                 $scope.projectList = data;
-                console.log($scope.bank);
-                console.log($scope.projectList[0].rt);
-              //  angular.forEach($scope.projectList, function(value, key){
-                //   console.log("TESTING!!!");
-                    
-                     
-                  //  console.log(key + ': ' + value.rt);
-                //});
-                //  alert($scope.projectList);
-            }); //close Get  
-        }; //close projects
+              
+                console.log($scope.projectList[0]);
+                console.log("Im In");
+                for(var i =0; i<$scope.projectList.length; i++){
+                    var aux=$scope.projectList[i].rt;
+                   $scope.projectList[i].rt = [];
+                     $http.get('/SearchRt', {
+                params: {
+                    "rt": aux
+                }
+            }).success(function (data) {
+                console.log("testing");
+              console.log(data[0]);
+                         $scope.banks.push(data[0]);
+                   // $scope.projectList[i].rt = $scope.search("12345678");
+                    //console.log($scope.projectList[i].rt);
+                        // $scope.projectList[i].rt.push(data);
+                           console.log("Banks: ");
+                console.log($scope.banks);
+            }); //close GET
+                   console.log($scope.projectList[i].rt); 
+                } // close FOR
+                
+              
+        }); //close get
+            
+         }; //close Projects
         // GET Status
         $scope.statusList = [];
         $scope.status = function () {
