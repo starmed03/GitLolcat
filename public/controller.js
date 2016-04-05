@@ -16,7 +16,7 @@
 				$scope.projects();
 				$scope.filterExpression = {}
 				$scope.enableText = true;
-				$scop.bankExist = true;
+				$scope.bankExist = true;
 				//$scope.project.installDate = null;
 			}
 			//var bankExist = true; //Variable that evaluates if the bank exists.
@@ -151,8 +151,6 @@
 					}); //close GET
 					console.log($scope.projectList[i].rt);
 				} // close FOR
-
-
 			}); //close get
 
 		}; //close Projects
