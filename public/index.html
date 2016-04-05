@@ -248,8 +248,8 @@
       </label>
       <label>Master #: <a href="https://facets.fiserv.net/Form/240.asp?CaseID={{proj.masterCase}}" target="_blank">{{proj.masterCase}}</a></label>
       <label>Branding #: <a href="https://facets.fiserv.net/Form/240.asp?CaseID={{proj.facetsCase}}" target="_blank">{{proj.facetsCase}}</a></label>
-    <p>RO Form: </p> <a href="#" class="branding-form">{{proj.facetsCase}}</a>  
-     <p>BO form: </p> <a href="#" class="branding-form">{{proj.facetsCase}}</a>
+    <p ng-if="proj.roForm != NULL">RO Form: </p> <a href="https://branding3.secureinternetbank.com/ro/{{proj.roForm}}" target="_blank" class="branding-form">{{proj.roForm}}</a>  
+     <p ng-if="proj.boForm != NULL">BO form: </p> <a href="https://branding3.secureinternetbank.com/bo/{{proj.boForm}}" target="_blank" class="branding-form">{{proj.boForm}}</a>
       <button class="caseButtons">Edit</button>
     </section>
     <!--  remove information above this once the application is commincating with the database  -->
