@@ -169,6 +169,34 @@
 		$scope.filterExpression = function (proj) {
 			return (proj.idStatus === $scope.selectedStatus.idStatus);
 		};
+        
+        $scope.StatusColor = function (color){
+            console.log(color);
+            colorClass ='';
+            switch (color){
+                case 1: {
+                    colorClass="gray";
+                } break;
+                case 2: {
+                    colorClass="lt-blue";
+                }break;
+                case 3: {
+                    colorClass="lt-green";
+                }break;
+                case 4: {
+                    colorClass="drk-teal";
+                }break;
+                case 5: {
+                    colorClass="green";
+                }break;
+                case 6: {
+                    colorClass="drk-gray";
+                }break;                    
+            }
+            console.log("Color: ");
+            console.log(colorClass);
+            return colorClass;
+        };
 
 	}; //close Main Controller
 	//Add controller to the module to initialize it. 

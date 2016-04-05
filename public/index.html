@@ -232,7 +232,7 @@
      <!-- <select name="StatusSelector" id="StatusSelector" ng-model="selectedStatus" ng-options="stat.name for stat in statusList">
       <option value="">Select</option>
     </select>-->
-    <section class="flex-item gray"  ng-repeat="proj in projectList | filter: filterExpression" repeat-end="">
+    <section class="flex-item {{StatusColor(proj.idStatus)}}"  ng-repeat="proj in projectList | filter: filterExpression" repeat-end="">
         <div ng-if="banks[$index].idBU ===1" class="pcs">&nbsp;</div>
         <div ng-if="banks[$index].idBU ===2" class="lites">&nbsp;</div>
         <div ng-if="banks[$index].idBU ===3" class="in-house">&nbsp;</div>
