@@ -14,14 +14,14 @@ h3:hover{color:#e28445; text-decoration:underline;}
 h4{font-size:1.2em; font-weight:bold; display:inline; color:#28686c; text-decoration:underline;}
 
 
-header{width:100%; height:110px; background:#ffffff; padding:0 0 10px 0; position:fixed; z-index:10; box-shadow:0px 1px 1px #777777; }
+header{width:100%; height:135px; background:#ffffff; padding:0 0 10px 0; position:fixed; z-index:10; box-shadow:0px 1px 1px #777777; }
 #hdr{max-width:980px; margin:0 auto;}
 #logoWrapper{position:static;}
-#logo{background:url('img/logo-sm.png'); width:176px; height:101px; float:left; margin:5px 0 5px 10px;}
+#logo{/*background:url('img/logo.png') no-repeat;*/ width:187px; height:125px; float:left; margin:10px 0 10px 10px;}
 
 
 /***Nav1***/
-#nav1{height:60px; position:relative; float:right; margin-top:15px;}
+#nav1{height:60px; position:relative; float:right; margin-top:35px;}
 #nav1 > ul  {list-style:none;}
 #nav1 > ul > li {display:block; float:left; padding: 0px 5px;}
 #nav1 a{color:#333333; margin:0px; text-decoration:none;}
@@ -92,7 +92,7 @@ p{margin:10px 0;}
 #entry a{text-decoration:none;}
 
 
-.flex-container {padding:2% 8%; margin: 150px 0 0 0; list-style: none; display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex; -webkit-flex-flow: row wrap; justify-content: space-around; float:left; width:84%;}
+.flex-container {padding:2% 8%; margin: 170px 0 0 0; list-style: none; display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex; -webkit-flex-flow: row wrap; justify-content: space-around; float:left; width:84%;}
 .flex-container select{width:98%;}
 .flex-item {padding: 0px 10px 10px 10px; width: 220px; height: auto; margin:10px; text-align: center; box-shadow:3px 3px 7px 2px rgba(51,51,51,0.3);}
 
@@ -188,9 +188,9 @@ form > input {margin:3px;}
 	.flex-item{margin:5px;}		
 }
 
-@media only screen and (max-width: 767px) {
-	header{height:110px;}
-
+@media only screen and (min-width: 445px) and (max-width: 767px) {
+	header{height:120px;}
+	#logo {margin:0;}
 	#nav1{margin-top:20px;}
 
 
@@ -214,7 +214,26 @@ form > input {margin:3px;}
 	.flex-container{margin:180px 0 0 0;}
 }
 
-@media screen and (max-width: 442px){
+@media only screen and (max-width: 444px) {
+	header{height:130px;}
+	#logo {margin: 0 auto;}
+	#nav1 {margin: 0 auto; float:none;}
+	#nav1 ul li{margin-top:10px;}
+	
+	#nav2 {height:auto; max-height: 0; overflow: hidden; float: none; text-align: center; width: 100%; -webkit-transition: max-height 0.5s; -moz-transition: max-height 0.5s; transition: max-height 0.5s; background:rgba(51,51,51,.7);}
+	#nav2.menuOpen {max-height: 1000px; -webkit-transition: max-height 0.5s; -moz-transition: max-height 0.5s; transition: max-height 0.5s;}
+	#nav2 > ul > li {display: block; width: 100%; background: rgba(51,51,51,.7); border-top: 1px solid #4d4d4d; padding:0;}
+	#nav2 ul li:hover {background: #e47469; color:#ffffff;}
+	#nav2 ul li a {color: #fff; text-shadow: #848484 0px 1px 2px; padding: 10px 0; width: 100%; text-decoration:none;}
+	.menuIcon {display: inline-block;}
+	
+	.flex-container{margin:180px 0 0 0;}
+
+}
+
+
+/*@media screen and (max-width: 442px){
 	#logo{background:url('img/logo-mobile.png'); width:54px; height:75px;}
 	#nav1{margin-top:10px;}
 }
+*/
