@@ -69,8 +69,8 @@
 		//EDIT PROJECT
 
 		//ADD BANK
-		$scope.addBank = function (bankRt) {
-			$scope.rt = bankRt;
+		$scope.addBank = function () {
+			//$scope.rt = bankRt;
 			console.log("SENDING BANK TO db:" + $scope.bank);
 			$http.post("/addBank", $scope.bank).success(function (response, err) {
 				if (err) {
@@ -91,6 +91,7 @@
 		};
 		//SEARCH BANK
 		$scope.search = function (bankRt) {
+            $scope.rt = bankRt;
 			console.log(bankRt);
 			if (bankRt == null) {
 				bankRt = 0;
