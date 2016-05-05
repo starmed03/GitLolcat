@@ -15,6 +15,7 @@
 				$scope.status();
 				$scope.projects();
 				$scope.filterExpression = {}
+                $scope.filterBU = {}
 				$scope.enableText = true;
 				$scope.bankExist = true;
 				//$scope.project.installDate = null;
@@ -170,9 +171,15 @@
 		$scope.filterExpression = function (proj) {
 			return (proj.idStatus === $scope.selectedStatus.idStatus);
 		};
+        $scope.selectedBU = {};
+		$scope.ChooseBU = function (bu) {
+			$scope.selectedBU = bu;
+		};
+        $scope.filterBU = function (proj) {
+			return (proj.idBU === $scope.selectedBU.idBU);
+		};
         
         $scope.StatusColor = function (color){
-            console.log(color);
             colorClass ='';
             switch (color){
                 case 1: {
@@ -194,8 +201,6 @@
                     colorClass="drk-gray";
                 }break;                    
             }
-            console.log("Color: ");
-            console.log(colorClass);
             return colorClass;
         };
 
