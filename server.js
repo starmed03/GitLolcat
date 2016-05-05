@@ -23,11 +23,12 @@ connection.connect(function(err) {
   }
 });
 
-app.post('/addProject', function (req, res) {
-    var bank = req.body;
+app.post('/addProject', function (req, resp) {
+    var project = req.body;
     console.log(project);
     connection.query('insert into project set ?', project, function (err, result) {
         if (err) {
+			console.log(query.sql);
             console.log(err)
             return resp.end(JSON.stringify({
                 success: false
@@ -48,6 +49,7 @@ app.post('/addBank', function (req, resp) {
     console.log(bank);
     connection.query('insert into bank set ?', bank, function (err, result) {
         if (err) {
+			console.log(query.sql);
             console.log(err)
             return resp.end(JSON.stringify({
                 success: false

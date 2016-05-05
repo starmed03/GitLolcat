@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="lolCatApp" >
+<html ng-app="lolCatApp">
 
 <head>
     <meta charset="utf-8">
@@ -12,11 +12,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script>
-        $(function() {
+        $(function () {
             $("#dueDate").datepicker();
             $("#installDate").datepicker();
         });
-
     </script>
 </head>
 
@@ -64,7 +63,7 @@
             <a href="#menuExpand"><img src="img/mob-filters.png" class="menuImg" />Filters</a>
         </div>
         <div id="nav2">
-            <ul>    
+            <ul>
                 <li ng-click="filterExpression = {}">Show All</li>
                 <li class="grayBtn" ng-click="filterExpression = {idStatus: 1}">New</li>
                 <li class="lt-blueBtn" ng-click="filterExpression = {idStatus: 2}">Branding Started</li>
@@ -90,7 +89,7 @@
        
         {{message}}<br/>
         
-    <form name="addProject" autocomplete="on" method="post" ng-submit="addProject()" >
+    <form name="addProjectForm" autocomplete="on" method="post" >
      
       <label>RT: </label>
       <input type="number" placeholder="123456789" autofocus required ng-model="bankRt" ng-focus="clear()" ng-blur="search(bankRt)" ng-change="{{project.rt}}" minlength=8 />
@@ -99,7 +98,7 @@
       <input type="text" placeholder="Financial Institution" required  ng-model="bank.name" ng-value="{{bank.name}}" ng-readonly =         "enableText"/>
       <br />
       <label>City:</label>
-      <input type="text" placeholder="City, State" required  ng-model="bank.location" ng-value="{{bank.location}}" ng-readonly = "enableText"/>
+      <input type="text" placeholder="City" required  ng-model="bank.location" ng-value="{{bank.location}}" ng-readonly = "enableText"/>
       <br />
       <label>State</label> 
       <select class="lstState" name="state" required ng-model="bank.state" >
@@ -186,16 +185,17 @@
       
       
       <label>Screenshot Due Date: </label>
-      <input  type="date" name="dueDate" id="dueDate"  ng-model="project.dueDate"  />
- 
+      <input type="date" name="dueDate" id="dueDate" ng-model="project.dueDate" ng-blur="convertToDate(project.dueDate) | date: 'yyyy-MM-dd'" placeholder="yyyy-MM-dd" />
+
       <br />
       <label>Installation Date: </label>
-      <input type="date" name="installDate" id="installDate" ng-model="project.installDate"  />
+      <input type="date" name="installDate" id="installDate" ng-model="project.installDate" />
+
       <br />
       
       <fieldset id="saRecieved">
         <label>S/A Recieved? </label>
-        <input type="radio" value="1" checked name="Yes" ng-model="project.saRecieved" />
+        <input type="radio" value="1" checked name="Yes" ng-model="project.saReceived" />
         <label>Yes</label>
         <input type="radio" value="0" name="No" ng-model="project.saRecieved" />
         <label>No</label>
@@ -206,8 +206,8 @@
       <label>BO Form #: </label>
       <input type="text" ng-model="project.boForm" ng-value="{{boForm.saRecieved}}" />
       <br />
-     <button class="btn btn-primary" ng-click="addBank()">Add Bank</button>
-     <button type="submit" ng-disabled="addProject.$invalid" >Add Project</button>
+     
+     <button ng-click="addProject()"  ng-disabled="addProject.$invalid" >Add Project</button>
 
         <div>
             <tt>{{bank.rt}}</tt>
@@ -229,34 +229,35 @@
 </span>
     </header>
     <div class="flex-container">
-     <!-- <select name="StatusSelector" id="StatusSelector" ng-model="selectedStatus" ng-options="stat.name for stat in statusList">
+        <!-- <select name="StatusSelector" id="StatusSelector" ng-model="selectedStatus" ng-options="stat.name for stat in statusList">
       <option value="">Select</option>
     </select>-->
-    <section class="flex-item {{StatusColor(proj.idStatus)}}"  ng-repeat="proj in projectList | filter: filterExpression" repeat-end="">
-        <div ng-if="banks[$index].idBU ===1" class="pcs">&nbsp;</div>
-        <div ng-if="banks[$index].idBU ===2" class="lites">&nbsp;</div>
-        <div ng-if="banks[$index].idBU ===3" class="in-house">&nbsp;</div>
-      <label>Due Date:
-        <time datetime="2014-06-20" class="due-date">{{proj.dueDate | date:'MM-dd-yyyy'}}</time> <!--FORMATO MYSQL Due Date: 2016-03-03T06:00:00.000Z-->
-      </label>
-      <label>Installation Date:
-        <time datetime="2014-06-20" class="due-date">{{proj.installDate | date:'MM-dd-yyyy'}}</time>
-      </label>
-      <!-- Bank Name, Bank Location -->
-      <address data-rt="123456789" ng-init="">{{banks[$index].name}} , {{banks[$index].location}}</address>
-      
-      <label>S/A Recieved?
-        <p ng-if="proj.saReceived ===1">Yes</p>
-        <p ng-if="proj.saReceived ===0">No</p>
-      </label>
-      <label>Master #: <a href="https://facets.fiserv.net/Form/240.asp?CaseID={{proj.masterCase}}" target="_blank">{{proj.masterCase}}</a></label>
-      <label>Branding #: <a href="https://facets.fiserv.net/Form/240.asp?CaseID={{proj.facetsCase}}" target="_blank">{{proj.facetsCase}}</a></label>
-    <p ng-if="proj.roForm != NULL">RO Form: </p> <a href="https://branding3.secureinternetbank.com/ro/{{proj.roForm}}" target="_blank" class="branding-form">{{proj.roForm}}</a>  
-     <p ng-if="proj.boForm != NULL">BO form: </p> <a href="https://branding3.secureinternetbank.com/bo/{{proj.boForm}}" target="_blank" class="branding-form">{{proj.boForm}}</a>
-      <button class="caseButtons">Edit</button>
-    </section>
-    <!--  remove information above this once the application is commincating with the database  -->
-  </div>
+        <section class="flex-item {{StatusColor(proj.idStatus)}}" ng-repeat="proj in projectList | filter: filterExpression" repeat-end="">
+            <div ng-if="banks[$index].idBU ===1" class="pcs">&nbsp;</div>
+            <div ng-if="banks[$index].idBU ===2" class="lites">&nbsp;</div>
+            <div ng-if="banks[$index].idBU ===3" class="in-house">&nbsp;</div>
+            <label>Due Date:
+                <time datetime="2014-06-20" class="due-date">{{proj.dueDate | date:'MM-dd-yyyy'}}</time>
+                <!--FORMATO MYSQL Due Date: 2016-03-03T06:00:00.000Z-->
+            </label>
+            <label>Installation Date:
+                <time datetime="2014-06-20" class="due-date">{{proj.installDate | date:'MM-dd-yyyy'}}</time>
+            </label>
+            <!-- Bank Name, Bank Location -->
+            <address data-rt="123456789" ng-init="">{{banks[$index].name}} , {{banks[$index].location}}</address>
+
+            <label>S/A Recieved?
+                <p ng-if="proj.saReceived ===1">Yes</p>
+                <p ng-if="proj.saReceived ===0">No</p>
+            </label>
+            <label>Master #: <a href="https://facets.fiserv.net/Form/240.asp?CaseID={{proj.masterCase}}" target="_blank">{{proj.masterCase}}</a></label>
+            <label>Branding #: <a href="https://facets.fiserv.net/Form/240.asp?CaseID={{proj.facetsCase}}" target="_blank">{{proj.facetsCase}}</a></label>
+            <p ng-if="proj.roForm != NULL">RO Form: </p> <a href="https://branding3.secureinternetbank.com/ro/{{proj.roForm}}" target="_blank" class="branding-form">{{proj.roForm}}</a>
+            <p ng-if="proj.boForm != NULL">BO form: </p> <a href="https://branding3.secureinternetbank.com/bo/{{proj.boForm}}" target="_blank" class="branding-form">{{proj.boForm}}</a>
+            <button class="caseButtons">Edit</button>
+        </section>
+        <!--  remove information above this once the application is commincating with the database  -->
+    </div>
     <script src="scripts.js"></script>
     <script src="controller.js"></script>
 
